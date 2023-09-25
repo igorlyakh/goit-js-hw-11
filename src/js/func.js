@@ -1,6 +1,9 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+// TODO: Добавить обработку кнопки load more
+// TODO: Бесконечный скролл(необязательно)
+
 function makeMarkup(imagesArr) {
   return imagesArr
     .map(image => {
