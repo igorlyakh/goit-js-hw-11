@@ -1,4 +1,7 @@
-export default function makeMarkup(imagesArr) {
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+function makeMarkup(imagesArr) {
   return imagesArr
     .map(image => {
       return `
@@ -23,3 +26,18 @@ export default function makeMarkup(imagesArr) {
     })
     .join('');
 }
+
+function onClick(e, dataHandler) {
+  e.preventDefault();
+  Loading.arrows();
+  const searchQuery = e.target.elements.searchQuery;
+  if (searchQuery.value === '') {
+    Loading.remove();
+    Notify.failure('Please enter your request correctly!');
+    return;
+  }
+  dataHandler(searchQuery.value);
+  e.target.reset();
+}
+
+export { makeMarkup, onClick };

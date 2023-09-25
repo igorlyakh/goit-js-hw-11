@@ -1,17 +1,27 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { fetchImgs } from './api';
-import makeMarkup from './func';
+import { makeMarkup, onClick } from './func';
 import { refs } from './refs';
 
-// console.log(fetchImgs('flower'));
-// makeMarkup();
-
-async function dataHandler() {
+async function dataHandler(searchTarget) {
   try {
-    const imgs = await fetchImgs('dog');
+    const imgs = await fetchImgs(searchTarget);
+    if (imgs.totalHits === 0) {
+      Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      return;
+    }
     refs.gallery.innerHTML = makeMarkup(imgs.hits);
+    Notify.success(`Hooray! We found ${imgs.totalHits} images.`);
   } catch (error) {
-    console.log(error);
+    Notify.failure('Oops, something went wrong. Try reloading the page!');
+  } finally {
+    Loading.remove();
   }
 }
 
-dataHandler();
+refs.form.addEventListener('submit', e => {
+  onClick(e, dataHandler);
+});

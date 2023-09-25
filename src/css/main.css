@@ -41,3 +41,22 @@
   background-color: #fff;
   background-color: #105b5e;
 }
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.photo-card > img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.photo-card {
+  width: 250px;
+  height: 400px;
+}
