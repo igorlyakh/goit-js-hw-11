@@ -30,7 +30,7 @@ function makeMarkup(imagesArr) {
     .join('');
 }
 
-function onClick(e, dataHandler) {
+function onSubmit(e, dataHandler) {
   e.preventDefault();
   Loading.arrows();
   const searchQuery = e.target.elements.searchQuery;
@@ -43,4 +43,4 @@ function onClick(e, dataHandler) {
   e.target.reset();
 }
 
-export { makeMarkup, onClick };
+export { makeMarkup, onSubmit };

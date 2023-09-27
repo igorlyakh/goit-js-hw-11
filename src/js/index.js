@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { fetchImgs } from './api';
-import { makeMarkup, onClick } from './func';
+import { makeMarkup, onSubmit } from './func';
 import { refs } from './refs';
 
 // TODO: Добавить функцию большого просмотра изображений
@@ -30,5 +30,5 @@ async function dataHandler(searchTarget) {
 refs.form.addEventListener('submit', e => {
   //? Подумать как убрать тут колбэк
   page = 1;
-  onClick(e, dataHandler);
+  onSubmit(e, dataHandler);
 });
