@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { fetchImgs } from './api';
-import { makeMarkup, onSubmit, observeHandler } from './func';
+import { makeMarkup, onSubmit } from './func';
 import { refs } from './refs';
 
 // TODO: Добавить функцию большого просмотра изображений

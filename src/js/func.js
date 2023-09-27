@@ -46,22 +46,38 @@ function onSubmit(e, dataHandler) {
   }
   page = 1;
   dataHandler(currentSearchTarget);
+
   e.target.reset();
   observe.observe(refs.trigger);
   return currentSearchTarget;
 }
 
 function observeHandler(e) {
-  if (e[0].isIntersecting) {
-    page += 1;
-    fetchImgByPage(page);
-  }
+  e.forEach(item => {
+    if (item.isIntersecting) {
+      page += 1;
+      fetchImgByPage(page);
+    }
+  });
 }
-
 async function fetchImgByPage(page) {
   imgs = await fetchImgs(currentSearchTarget, page);
   const markup = makeMarkup(imgs.hits);
   refs.gallery.insertAdjacentHTML('beforeend', markup);
+  const totalPages = Math.floor(imgs.total / 40);
+  if (page >= 3) {
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
+  if (page === totalPages) {
+    observe.disconnect();
+  }
 }
 
 export { makeMarkup, onSubmit, observeHandler };
