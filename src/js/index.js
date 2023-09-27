@@ -1,15 +1,12 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { fetchImgs } from './api';
-import { makeMarkup, onSubmit } from './func';
+import { makeMarkup, onSubmit, observeHandler } from './func';
 import { refs } from './refs';
 
 // TODO: Добавить функцию большого просмотра изображений
 
-//? Как прокидывать глобальную переменную дальше?
-let page = 1;
-
-async function dataHandler(searchTarget) {
+async function dataHandler(searchTarget, page = 1) {
   try {
     const imgs = await fetchImgs(searchTarget, page);
     if (imgs.totalHits === 0) {
@@ -28,7 +25,5 @@ async function dataHandler(searchTarget) {
 }
 
 refs.form.addEventListener('submit', e => {
-  //? Подумать как убрать тут колбэк
-  page = 1;
   onSubmit(e, dataHandler);
 });
