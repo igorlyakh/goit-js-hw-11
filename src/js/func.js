@@ -1,5 +1,6 @@
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { fetchImgs } from './api';
 import { refs } from './refs';
 
@@ -52,7 +53,7 @@ function onSubmit(e, dataHandler) {
   e.target.reset();
   setTimeout(() => {
     observe.observe(refs.trigger);
-  }, 500);
+  }, 1000);
   return currentSearchTarget;
 }
 

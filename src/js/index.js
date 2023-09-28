@@ -1,5 +1,6 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { fetchImgs } from './api';
@@ -28,4 +29,9 @@ async function dataHandler(searchTarget, page = 1) {
 
 refs.form.addEventListener('submit', e => {
   onSubmit(e, dataHandler);
+});
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
 });
