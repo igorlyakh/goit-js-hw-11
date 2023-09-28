@@ -50,7 +50,7 @@
   margin-top: 20px;
 }
 
-.photo-card > img {
+.photo-card img {
   width: 250px;
   height: 200px;
   object-fit: cover;

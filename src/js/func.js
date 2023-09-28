@@ -14,7 +14,9 @@ function makeMarkup(imagesArr) {
     .map(image => {
       return `
       <div class="photo-card">
-          <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+          <a href="${image.largeImageURL}">
+            <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+          </a>
           <div class="info">
             <p class="info-item">
              <b>Likes: ${image.likes}</b>
@@ -48,7 +50,9 @@ function onSubmit(e, dataHandler) {
   dataHandler(currentSearchTarget);
 
   e.target.reset();
-  observe.observe(refs.trigger);
+  setTimeout(() => {
+    observe.observe(refs.trigger);
+  }, 500);
   return currentSearchTarget;
 }
 
@@ -65,16 +69,14 @@ async function fetchImgByPage(page) {
   const markup = makeMarkup(imgs.hits);
   refs.gallery.insertAdjacentHTML('beforeend', markup);
   const totalPages = Math.floor(imgs.total / 40);
-  if (page >= 3) {
-    const { height: cardHeight } = document
-      .querySelector('.gallery')
-      .firstElementChild.getBoundingClientRect();
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
 
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
-  }
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
   if (page === totalPages) {
     observe.disconnect();
   }
