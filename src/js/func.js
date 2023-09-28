@@ -67,7 +67,7 @@ function observeHandler(e) {
   });
 }
 async function fetchImgByPage(page) {
-  imgs = await fetchImgs(currentSearchTarget, page);
+  const imgs = await fetchImgs(currentSearchTarget, page);
   const markup = makeMarkup(imgs.hits);
   refs.gallery.insertAdjacentHTML('beforeend', markup);
   const totalPages = Math.floor(imgs.total / 40);

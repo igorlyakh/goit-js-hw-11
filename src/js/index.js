@@ -12,8 +12,6 @@ let gallery = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-// TODO: Добавить функцию большого просмотра изображений
-
 async function dataHandler(searchTarget, page = 1) {
   try {
     const imgs = await fetchImgs(searchTarget, page);
