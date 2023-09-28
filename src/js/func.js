@@ -3,6 +3,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { fetchImgs } from './api';
 import { refs } from './refs';
+import { gallery } from '.';
 
 let page = 1;
 
@@ -81,6 +82,7 @@ async function fetchImgByPage(page) {
   if (page === totalPages) {
     observe.disconnect();
   }
+  gallery.refresh();
 }
 
 export { makeMarkup, onSubmit, observeHandler };

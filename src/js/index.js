@@ -7,6 +7,11 @@ import { fetchImgs } from './api';
 import { makeMarkup, onSubmit } from './func';
 import { refs } from './refs';
 
+let gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 // TODO: Добавить функцию большого просмотра изображений
 
 async function dataHandler(searchTarget, page = 1) {
@@ -25,13 +30,11 @@ async function dataHandler(searchTarget, page = 1) {
   } finally {
     Loading.remove();
   }
+  gallery.refresh();
 }
 
 refs.form.addEventListener('submit', e => {
   onSubmit(e, dataHandler);
 });
 
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+export { gallery };
