@@ -68,9 +68,9 @@ function observeHandler(e) {
 }
 async function fetchImgByPage(page) {
   const imgs = await fetchImgs(currentSearchTarget, page);
+  const totalPages = Math.ceil(imgs.totalHits / 40);
   const markup = makeMarkup(imgs.hits);
   refs.gallery.insertAdjacentHTML('beforeend', markup);
-  const totalPages = Math.floor(imgs.total / 40);
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
@@ -79,7 +79,7 @@ async function fetchImgByPage(page) {
     top: cardHeight * 2,
     behavior: 'smooth',
   });
-  if (page === totalPages) {
+  if (page >= totalPages) {
     observe.disconnect();
   }
   gallery.refresh();
